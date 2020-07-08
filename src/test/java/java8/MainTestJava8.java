@@ -2,6 +2,7 @@ package java8;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ Author ：wxw.
@@ -14,10 +15,12 @@ public class MainTestJava8{
 
         /**
          * 记录
-         * （1）HashMap
-         *
+         * （1） HashMap
+         *  (2) ConcurrentHashMap
          */
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> hashMap = new HashMap<String, String>();
+        Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
+
 
 
     }
