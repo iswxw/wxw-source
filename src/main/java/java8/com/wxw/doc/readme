@@ -1,0 +1,20 @@
+
+Java使用手册   https://m.php.cn/manual/view/22422.html
+
+## 基础
+（1）HashMap
+（2）ConcurrentHashMap
+（3）AbstractQueuedSynchronizer(AQS)
+(4) ReentrantLock
+(5) ArrayList
+（6）LinkedList
+（7）synchronized
+(8) ThreadLocal
+(9) 线程池 ThreadPoolExecutor   Executers
+（10）HashTable
+
+
+## 并发
+  （1）synchronized
+
+## 线程池
