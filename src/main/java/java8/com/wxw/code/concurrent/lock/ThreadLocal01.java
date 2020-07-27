@@ -10,13 +10,15 @@ public class ThreadLocal01 {
     private static ThreadLocal<String> local = new ThreadLocal<String>(){
         @Override
         protected String initialValue() {
-            return "wxw:";
+            return "wxw";
         }
     };
     static class MyRunnable implements Runnable{
 
         private int num;
 
+        public MyRunnable() {
+        }
         public MyRunnable(int num) {
             this.num = num;
         }
@@ -33,5 +35,6 @@ public class ThreadLocal01 {
         new Thread(new MyRunnable(1)).start();
         new Thread(new MyRunnable(2)).start();
         new Thread(new MyRunnable(3)).start();
+        System.out.println("local.get() = " + local.get());
     }
 }
