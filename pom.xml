@@ -13,5 +13,6 @@
          <module>source-java8</module>
          <module>source-java11</module>
          <module>source-java13</module>
+         <module>source-springboot</module>
      </modules>
 </project>
