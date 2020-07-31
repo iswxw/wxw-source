@@ -25,6 +25,8 @@
 
 package java.util;
 
+import sun.misc.SharedSecrets;
+
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.Serializable;
@@ -34,7 +36,6 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import sun.misc.SharedSecrets;
 
 /**
  * Hash table based implementation of the <tt>Map</tt> interface.  This
@@ -244,6 +245,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * The load factor used when none specified in constructor.
+     * 加载因子
      */
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
@@ -373,6 +375,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
+     * 保证返回的是2的幂次方
      * Returns a power of two size for the given target capacity.
      */
     static final int tableSizeFor(int cap) {
@@ -407,6 +410,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     transient int size;
 
     /**
+     * 被修改次数
      * The number of times this HashMap has been structurally modified
      * Structural modifications are those that change the number of mappings in
      * the HashMap or otherwise modify its internal structure (e.g.,
@@ -416,6 +420,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     transient int modCount;
 
     /**
+     * 阈值
      * The next size value at which to resize (capacity * load factor).
      *
      * @serial
@@ -618,15 +623,17 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * @param hash hash for key
      * @param key the key
      * @param value the value to put
-     * @param onlyIfAbsent if true, don't change existing value
-     * @param evict if false, the table is in creation mode.
+     * @param onlyIfAbsent if true, don't change existing value [true表示不修改已经存在的值]
+     * @param evict if false, the table is in creation mode.[false表示hash表处于创建模式]
      * @return previous value, or null if none
      */
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
         Node<K,V>[] tab; Node<K,V> p; int n, i;
+        //当前数据为空，则进行resize()
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
+        // 桶中没有链表，创建新桶节点
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
         else {
@@ -658,7 +665,9 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 return oldValue;
             }
         }
+        // 修改次数 +1
         ++modCount;
+        // 添加长度大于阈值 则 扩容
         if (++size > threshold)
             resize();
         afterNodeInsertion(evict);
@@ -1779,6 +1788,8 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     }
 
     // Callbacks to allow LinkedHashMap post-actions
+
+    // 键值重复时，accessOrder为true时将节点移到最后
     void afterNodeAccess(Node<K,V> p) { }
     void afterNodeInsertion(boolean evict) { }
     void afterNodeRemoval(Node<K,V> p) { }
