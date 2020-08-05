@@ -27,4 +27,15 @@
             <version>2.3.1.RELEASE</version>
         </dependency>
     </dependencies>
+
+    <!--Spring Boot的maven插件-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -1,0 +1,27 @@
+# 自定义测试用环境
+spring:
+  profiles:
+    active: test
+
+
+---
+spring:
+  profiles: dev
+server:
+  port: 8082
+
+
+---
+spring:
+  profiles: prod
+server:
+  port: 8083
+
+---
+# 设置服务端端口号
+server:
+  port: 8081
+spring:
+  application:
+    name: source-springboot
+  profiles: test

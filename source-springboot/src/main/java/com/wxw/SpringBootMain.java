@@ -9,9 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @ Description：SpringBoot 的启动类
  * @ Version:   v_0.0.1
  */
-@SpringBootApplication
+@SpringBootApplication // @SpringBootApplication来标注一个主程序类，说明这是一个SpringBoot应用
 public class SpringBootMain {
     public static void main(String[] args) {
+        // spring应用启动
         SpringApplication.run(SpringBootMain.class, args);
     }
 }
