@@ -1,7 +1,9 @@
-package java8.com.wxw.code.study;
+package java8.com.wxw.code.study.hashmap;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.sun.xml.internal.fastinfoset.util.ValueArray.MAXIMUM_CAPACITY;
 
 /**
  * @Author: wxw
@@ -16,13 +18,34 @@ public class HashMap01 {
     public static void main(String[] args) {
 
         // hashmap 基本功能测试
-        // HashMapTest01();
+        //HashMapTest01();
 
         // hashmap 扩容测试
         // testResize();
 
         // hashMap的computeIfAbsent()函数计算语法
         // testComputeIfAbsent();
+
+        // tableSizeFor 根据容量参数，大于并最近的一个2的n次幂的数
+        /**
+         * 问题：边界区问题
+         *  （1）参数幂次变换的时候开始为什么要减1 （int类型的最大值时，变换后返回 n+1会导致溢出, 防止cap已经是2的幂次方，不减一时，导致无符号右移变为原来的2倍）
+         *  （2）参数幂次变换的时候最后为什么要加1 （当输入为0的时候就会发现，方法的输出为1，HashMap的容量只有大于0时才有意义）
+         * 解答：https://www.jianshu.com/p/e33d3fa32091
+         *  （3）为什么计算结果总是2的幂次方
+         * 解答：https://www.jianshu.com/p/e33d3fa32091 （因为无符号右移16位后和低16位异样或的结果刚好是30位，这样保证了高32位都为1）
+         */
+        testTableSizeFor();
+    }
+
+    // hashmap tableSizeFor 保证容量2幂次变换
+    private static void testTableSizeFor() {
+        System.out.println(tableSizeFor(0));
+        System.out.println(tableSizeFor(1));
+        System.out.println(tableSizeFor(5));
+        System.out.println(tableSizeFor(25));
+        System.out.println(tableSizeFor(125));
+        System.out.println(tableSizeFor(625));
     }
 
     // HashMap函数计算
@@ -78,6 +101,18 @@ public class HashMap01 {
         System.out.println(map);
         System.out.println(map.get("1"));
         System.out.println("map = " + map.size()); //map = 6
+    }
+
+    // 根据容量参数，返回一个2的n次幂的table长度
+    //
+    public static final int tableSizeFor(int cap) {
+        int n = cap - 1;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 
 }

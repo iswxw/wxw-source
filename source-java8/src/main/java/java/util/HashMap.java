@@ -387,7 +387,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     * 保证返回的是2的幂次方
+     * 保证初始容量返回的是2的幂次方
      * Returns a power of two size for the given target capacity.
      */
     static final int tableSizeFor(int cap) {
@@ -460,19 +460,22 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      *
      * @param initialCapacity the initial capacity
      * @param loadFactor      the load factor
-     * @throws IllegalArgumentException if the initial capacity is negative
-     *                                  or the load factor is nonpositive
+     * @throws IllegalArgumentException if the initial capacity is negative(取消)
+     *                                  or the load factor is nonpositive(负的，非正的)
      */
     public HashMap(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0)
+            // 非法参数异常
             throw new IllegalArgumentException("Illegal initial capacity: " +
                     initialCapacity);
+        // 大于最大值就设置等于最大值 MAXIMUM_CAPACITY = 1<<30 2的30次方
         if (initialCapacity > MAXIMUM_CAPACITY)
             initialCapacity = MAXIMUM_CAPACITY;
         if (loadFactor <= 0 || Float.isNaN(loadFactor))
             throw new IllegalArgumentException("Illegal load factor: " +
                     loadFactor);
         this.loadFactor = loadFactor;
+        // tableSizeFor initialCapacity 的2的幂，若指定初始容量为９，则实际 hashMap 容量为16
         this.threshold = tableSizeFor(initialCapacity);
     }
 
