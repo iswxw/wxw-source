@@ -21,7 +21,7 @@ public class HashMap01 {
         //HashMapTest01();
 
         // hashmap 扩容测试
-        // testResize();
+        testResize();
 
         // hashMap的computeIfAbsent()函数计算语法
         // testComputeIfAbsent();
@@ -35,7 +35,7 @@ public class HashMap01 {
          *  （3）为什么计算结果总是2的幂次方
          * 解答：https://www.jianshu.com/p/e33d3fa32091 （因为无符号右移16位后和低16位异样或的结果刚好是30位，这样保证了高32位都为1）
          */
-        testTableSizeFor();
+        //testTableSizeFor();
     }
 
     // hashmap tableSizeFor 保证容量2幂次变换
@@ -74,6 +74,7 @@ public class HashMap01 {
     }
 
     // hashmap 扩容测试
+    // https://my.oschina.net/u/2307589/blog/1800587
     private static void testResize() {
         // cap = threshold * loadFactor;
         HashMap<String, Object> hashMap = new HashMap<String, Object>(4,0.75f);

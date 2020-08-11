@@ -706,23 +706,44 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Otherwise, because we are using power-of-two expansion, the
      * elements from each bin must either stay at same index, or move
      * with a power of two offset in the new table.
-     *
+     * s
      * @return the table
      */
+    // 扩容
     final Node<K, V>[] resize() {
         Node<K, V>[] oldTab = table;
         int oldCap = (oldTab == null) ? 0 : oldTab.length;
         int oldThr = threshold;
         int newCap, newThr = 0;
+        /**
+         *  1、resize（）函数在size　> threshold时被调用。
+         *             oldCap大于 0 代表原来的 table 表非空， oldCap 为原表的大小，
+         *             oldThr（threshold） 为 oldCap × load_factor
+         *    容量大于阈值时 扩容
+         */
         if (oldCap > 0) {
             if (oldCap >= MAXIMUM_CAPACITY) {
-                threshold = Integer.MAX_VALUE;
+                threshold = Integer.MAX_VALUE; // 2^31-1
                 return oldTab;
             } else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
                     oldCap >= DEFAULT_INITIAL_CAPACITY)
+                // ====
                 newThr = oldThr << 1; // double threshold
+            /**
+             *  2、resize（）函数在table为空被调用。
+             *         oldCap 小于等于 0 且 oldThr 大于0，代表用户创建了一个 HashMap，但是使用的构造函数为
+             *         HashMap(int initialCapacity, float loadFactor) 或 HashMap(int initialCapacity)
+             *         或 HashMap(Map<? extends K, ? extends V> m)，导致 oldTab 为 null，oldCap 为0，
+             *         oldThr 为用户指定的 HashMap的初始容量。
+             *  初始化时，数组为空但是指定了容量
+             */
         } else if (oldThr > 0) // initial capacity was placed in threshold
             newCap = oldThr;
+        /**
+         *   3、resize（）函数在table为空被调用。
+         *            oldCap 小于等于 0 且 oldThr 等于0，用户调用 HashMap()构造函数创建的　HashMap，所有值均采用默认值，
+         *        　　 oldTab（Table）表为空，oldCap为0，oldThr等于0，
+         */
         else {               // zero initial threshold signifies using defaults
             newCap = DEFAULT_INITIAL_CAPACITY;
             newThr = (int) (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
@@ -737,38 +758,51 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         Node<K, V>[] newTab = (Node<K, V>[]) new Node[newCap];
         table = newTab;
         if (oldTab != null) {
+            //把　oldTab 中的节点　reHash 到　newTab 中去
             for (int j = 0; j < oldCap; ++j) {
                 Node<K, V> e;
+                //若节点是单个节点，直接在 newTab　中进行重定位
                 if ((e = oldTab[j]) != null) {
                     oldTab[j] = null;
                     if (e.next == null)
+                        // 直接保留到桶数组中
                         newTab[e.hash & (newCap - 1)] = e;
+                    //若节点是　TreeNode 节点，要进行 红黑树的 rehash　操作
                     else if (e instanceof TreeNode)
                         ((TreeNode<K, V>) e).split(this, newTab, j, oldCap);
+                    //若是链表，进行链表的 rehash　操作
                     else { // preserve order
                         Node<K, V> loHead = null, loTail = null;
                         Node<K, V> hiHead = null, hiTail = null;
                         Node<K, V> next;
                         do {
                             next = e.next;
+                            //根据算法　e.hash & oldCap　判断节点位置　rehash　后是否发生改变
+                            // hash 冲突
                             if ((e.hash & oldCap) == 0) {
                                 if (loTail == null)
+                                    // 低位头结点
                                     loHead = e;
                                 else
                                     loTail.next = e;
                                 loTail = e;
+                                // 没有冲突
                             } else {
                                 if (hiTail == null)
+                                    // 高位头结点
                                     hiHead = e;
                                 else
                                     hiTail.next = e;
                                 hiTail = e;
                             }
                         } while ((e = next) != null);
+
+                        // 低位头结点 放在原来的位置
                         if (loTail != null) {
                             loTail.next = null;
                             newTab[j] = loHead;
                         }
+                        // 高位头结点放在 放在原来位置+oldCap(老容量的位置) // rehash　后节点新的位置一定为原来基础上加上　oldCap
                         if (hiTail != null) {
                             hiTail.next = null;
                             newTab[j + oldCap] = hiHead;
