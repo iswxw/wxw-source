@@ -18,10 +18,10 @@ public class HashMap01 {
     public static void main(String[] args) {
 
         // hashmap 基本功能测试
-        //HashMapTest01();
+        HashMapTest01();
 
         // hashmap 扩容测试
-        testResize();
+        //testResize();
 
         // hashMap的computeIfAbsent()函数计算语法
         // testComputeIfAbsent();
@@ -93,7 +93,9 @@ public class HashMap01 {
         map.put("3", "A");
         map.put("5", "A");
         map.put("6", "A");
-        map.put("7", "A");
+        String put = map.put("7", "A");
+        // key重复返回旧值、否则返回 null
+        System.out.println("hashMap 正常添加的返回值 put = " + put);
         // 特殊操作
         map.putIfAbsent("7","小伟"); // onlyIfAbsent = true 如果存在就保留旧值，不进行put操作
         // map.clear(); // 清除map集合元素为null

@@ -344,6 +344,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * cheapest possible way to reduce systematic lossage, as well as
      * to incorporate impact of the highest bits that would otherwise
      * never be used in index calculations because of table bounds.
+     * never be used in index calculations because of table bounds.
      */
     static final int hash(Object key) {
         int h;
