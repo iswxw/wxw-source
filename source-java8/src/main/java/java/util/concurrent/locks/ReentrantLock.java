@@ -123,41 +123,52 @@ public class ReentrantLock implements Lock, java.io.Serializable {
         abstract void lock();
 
         /**
+         * 尝试去获取锁。如果尝试获取锁成功，方法直接返回。
          * Performs non-fair tryLock.  tryAcquire is implemented in
          * subclasses, but both need nonfair try for trylock method.
          */
         final boolean nonfairTryAcquire(int acquires) {
+            // 获取当前线程
             final Thread current = Thread.currentThread();
+            // 获取state的变量值
             int c = getState();
-            if (c == 0) {
+            if (c == 0) { //没有线程占用锁
                 if (compareAndSetState(0, acquires)) {
+                    //占用锁成功,设置独占线程为当前线程
                     setExclusiveOwnerThread(current);
                     return true;
                 }
             }
-            else if (current == getExclusiveOwnerThread()) {
+            else if (current == getExclusiveOwnerThread()) { //当前线程已经占用该锁
                 int nextc = c + acquires;
                 if (nextc < 0) // overflow
                     throw new Error("Maximum lock count exceeded");
+                // 更新state值为新的重入次数
                 setState(nextc);
                 return true;
             }
             return false;
         }
 
+        // 释放当前线程占用的锁
         protected final boolean tryRelease(int releases) {
-            int c = getState() - releases;
+            int c = getState() - releases; // 计算释放后state的值
+            // 如果不是当前线程占用锁，抛出异常
             if (Thread.currentThread() != getExclusiveOwnerThread())
                 throw new IllegalMonitorStateException();
             boolean free = false;
             if (c == 0) {
+                // 锁被重入次数为0，表示释放锁成功
                 free = true;
+                // 清空独占线程
                 setExclusiveOwnerThread(null);
             }
+            // 跟新state值
             setState(c);
             return free;
         }
 
+        // Held：持有
         protected final boolean isHeldExclusively() {
             // While we must in general read state before owner,
             // we don't need to do so to check if current thread is owner
@@ -286,6 +297,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
     }
 
     /**
+     *
      * Acquires the lock unless the current thread is
      * {@linkplain Thread#interrupt interrupted}.
      *
