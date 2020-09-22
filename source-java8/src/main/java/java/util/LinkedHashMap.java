@@ -298,6 +298,7 @@ public class LinkedHashMap<K,V>
         LinkedHashMap.Entry<K,V> first;
         if (evict && (first = head) != null && removeEldestEntry(first)) {
             K key = first.key;
+            // 删除最老的节点
             removeNode(hash(key), key, null, false, true);
         }
     }
