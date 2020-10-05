@@ -18,6 +18,7 @@
          <module>source-java11</module>
          <module>source-java13</module>
          <module>source-springboot</module>
+         <module>source-rocketmq-spring</module>
      </modules>
 
     <!--编译管理 jdk版本和字符集编码-->
