@@ -177,6 +177,7 @@ public class LockSupport {
     }
 
     /**
+     * 挂起阻塞指定时长后自动释放许可
      * Disables the current thread for thread scheduling purposes, for up to
      * the specified waiting time, unless the permit is available.
      *
@@ -218,6 +219,7 @@ public class LockSupport {
     }
 
     /**
+     * 指定最后释放时间
      * Disables the current thread for thread scheduling purposes, until
      * the specified deadline, unless the permit is available.
      *
@@ -258,6 +260,7 @@ public class LockSupport {
     }
 
     /**
+     * 获取阻塞线程的类
      * Returns the blocker object supplied to the most recent
      * invocation of a park method that has not yet unblocked, or null
      * if not blocked.  The value returned is just a momentary
@@ -276,6 +279,7 @@ public class LockSupport {
     }
 
     /**
+     * 阻塞挂起
      * Disables the current thread for thread scheduling purposes unless the
      * permit is available.
      *
@@ -305,6 +309,7 @@ public class LockSupport {
     }
 
     /**
+     * 阻塞时长
      * Disables the current thread for thread scheduling purposes, for up to
      * the specified waiting time, unless the permit is available.
      *
@@ -339,6 +344,7 @@ public class LockSupport {
     }
 
     /**
+     * 指定最后释放时间
      * Disables the current thread for thread scheduling purposes, until
      * the specified deadline, unless the permit is available.
      *
