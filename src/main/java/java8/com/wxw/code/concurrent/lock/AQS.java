@@ -1,5 +1,7 @@
 package java8.com.wxw.code.concurrent.lock;
 
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+
 /**
  * @ Author ：wxw.
  * @ Date ： 10:47 2020/9/18
@@ -8,8 +10,9 @@ package java8.com.wxw.code.concurrent.lock;
  */
 public class AQS {
     public static void main(String[] args) {
+        //参考： https://www.jianshu.com/p/6e8e5a12286c
+        // AbstractQueuedSynchronizer
 
-        // AbstractQueuedSynchronizer  参考： https://www.jianshu.com/p/6e8e5a12286chttps://www.jianshu.com/p/6e8e5a12286c
 
     }
 }
