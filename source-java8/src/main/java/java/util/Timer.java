@@ -24,7 +24,6 @@
  */
 
 package java.util;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -117,6 +116,7 @@ public class Timer {
     };
 
     /**
+     * 该ID可以用来生成线程名称
      * This ID is used to generate thread names.
      */
     private final static AtomicInteger nextSerialNumber = new AtomicInteger(0);
@@ -125,7 +125,8 @@ public class Timer {
     }
 
     /**
-     * Creates a new timer.  The associated thread does <i>not</i>
+     * 创建一个定时器，创建的线程不会以守护线程运行
+     * Creates a new timer.  The associated[相关的] thread does <i>not</i>
      * {@linkplain Thread#setDaemon run as a daemon}.
      */
     public Timer() {
@@ -133,7 +134,8 @@ public class Timer {
     }
 
     /**
-     * Creates a new timer whose associated thread may be specified to
+     * 创建定时器，可以指定是否以守护进程运行定时器
+     * Creates a new timer whose associated thread may be specified to [细节规定，必须指定]
      * {@linkplain Thread#setDaemon run as a daemon}.
      * A daemon thread is called for if the timer will be used to
      * schedule repeating "maintenance activities", which must be
