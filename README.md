@@ -1,30 +1,32 @@
-# jdk1.8-source-analysis
+## Jdk-source-analysis 项目
 
-JDK1.8源码分析
+---
 
-# 导入源码过程中的注意事项
+### 一、导入源码过程中的注意事项
 
-JDK1.8对应JDK版本下载：[JDK1.8](https://pan.baidu.com/s/1KYYnDt4iHXjvUO_xAy8fKg) 提取码：49wi
+- JDK1.8对应JDK版本下载：[JDK1.8](https://pan.baidu.com/s/1KYYnDt4iHXjvUO_xAy8fKg) 提取码：49wi
 
-源码在src目录下
+1.1 **源码在src目录下**
 
-以下两个类手动添加的，解决编译过程中该包的丢失
+(1) 以下两个类手动添加的，解决编译过程中该包的丢失
 
-sun.font.FontConfigManager 
+1. sun.font.FontConfigManager 
 
-sun.awt.UNIXToolkit 
+2. sun.awt.UNIXToolkit 
 
-其中：
+（2）注意
+
    1.请手动添加jdk下面的lib到path中
-   
+
    2.lib文件夹下面的junit测试jar包添加到path中，以便编写测试用例
 
-# 学习计划
+## 阅读进度
 
 很多java开发的小伙伴都会阅读jdk源码，然而确不知道应该从哪读起。以下为小编整理的通常所需阅读的源码范围。
 标题为包名，后面序号为优先级1-4，优先级递减
 
 1、java.lang
+
 ```
 1) Object 1
 2) String 1
@@ -52,6 +54,7 @@ sun.awt.UNIXToolkit
 24) Void 4
 ```
 2、java.util
+
 ```
 1) AbstractList 1
 2) AbstractMap 1
@@ -185,8 +188,4 @@ sun.awt.UNIXToolkit
 03=JDK1.8源码分析03之idea搭建源码阅读环境
 
 04=JDK1.8源码分析04之java.lang.Object类
-
-# JDK相关面试集锦系列文章
-
-持续更新中.......
 
