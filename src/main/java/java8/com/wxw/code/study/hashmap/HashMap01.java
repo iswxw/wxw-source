@@ -3,8 +3,6 @@ package java8.com.wxw.code.study.hashmap;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sun.xml.internal.fastinfoset.util.ValueArray.MAXIMUM_CAPACITY;
-
 /**
  * @Author: wxw
  * @create: 2020-04-21-16:16
@@ -115,7 +113,7 @@ public class HashMap01 {
         n |= n >>> 4;
         n |= n >>> 8;
         n |= n >>> 16;
-        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+        return (n < 0) ? 1 : (n >= Integer.MAX_VALUE) ? Integer.MAX_VALUE : n + 1;
     }
 
 }
