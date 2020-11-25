@@ -373,6 +373,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      *         current thread, or the lock was already held by the current
      *         thread; and {@code false} otherwise
      */
+    //立即返回结果；尝试获得锁,如果获得锁立即返回ture,失败立即返回false
     public boolean tryLock() {
         return sync.nonfairTryAcquire(1);
     }
@@ -541,6 +542,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      * @return the number of holds on this lock by the current thread,
      *         or zero if this lock is not held by the current thread
      */
+    //当前线程是否抢到锁。返回0代表没有
     public int getHoldCount() {
         return sync.getHoldCount();
     }
@@ -667,6 +669,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
      *
      * @return the estimated number of threads waiting for this lock
      */
+    //查看有多少线程等待锁
     public final int getQueueLength() {
         return sync.getQueueLength();
     }

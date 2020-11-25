@@ -622,8 +622,7 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
      * @return the new node
      */
     private Node addWaiter(Node mode) {
-
-        //初始化节点,设置关联线程和模式(独占 or 共享)
+        //初始化节点,设置关联线程和模式(mode:独占 or 共享)
         Node node = new Node(Thread.currentThread(), mode);
         // Try the fast path of enq; backup to full enq on failure
         // 获取尾节点引用
@@ -766,12 +765,14 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
      */
     private void cancelAcquire(Node node) {
         // Ignore if node doesn't exist
+        // 将无效节点过滤
         if (node == null)
             return;
-
+        // 设置该节点不关联任何线程，也就是虚节点
         node.thread = null;
 
         // Skip cancelled predecessors
+        // 通过前驱节点跳过取消状态的节点
         Node pred = node.prev;
         while (pred.waitStatus > 0)
             node.prev = pred = pred.prev;
@@ -779,11 +780,13 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
         // predNext is the apparent node to unsplice. CASes below will
         // fail if not, in which case, we lost race vs another cancel
         // or signal, so no further action is necessary.
+        // 获取过滤之后前驱节点的后继节点
         Node predNext = pred.next;
 
         // Can use unconditional write instead of CAS here.
         // After this atomic step, other Nodes can skip past us.
         // Before, we are free of interference from other threads.
+        // 把当前节点的状态设置为 cancel
         node.waitStatus = Node.CANCELLED;
 
         // If we are the tail, remove ourselves.
@@ -2304,17 +2307,11 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
 
     static {
         try {
-            stateOffset = unsafe.objectFieldOffset
-                (AbstractQueuedSynchronizer.class.getDeclaredField("state"));
-            headOffset = unsafe.objectFieldOffset
-                (AbstractQueuedSynchronizer.class.getDeclaredField("head"));
-            tailOffset = unsafe.objectFieldOffset
-                (AbstractQueuedSynchronizer.class.getDeclaredField("tail"));
-            waitStatusOffset = unsafe.objectFieldOffset
-                (Node.class.getDeclaredField("waitStatus"));
-            nextOffset = unsafe.objectFieldOffset
-                (Node.class.getDeclaredField("next"));
-
+            stateOffset = unsafe.objectFieldOffset(AbstractQueuedSynchronizer.class.getDeclaredField("state"));
+            headOffset = unsafe.objectFieldOffset(AbstractQueuedSynchronizer.class.getDeclaredField("head"));
+            tailOffset = unsafe.objectFieldOffset(AbstractQueuedSynchronizer.class.getDeclaredField("tail"));
+            waitStatusOffset = unsafe.objectFieldOffset(Node.class.getDeclaredField("waitStatus"));
+            nextOffset = unsafe.objectFieldOffset(Node.class.getDeclaredField("next"));
         } catch (Exception ex) { throw new Error(ex); }
     }
 
