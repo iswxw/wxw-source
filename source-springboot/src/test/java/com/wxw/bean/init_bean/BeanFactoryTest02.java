@@ -1,4 +1,4 @@
-package com.wxw.bean;
+package com.wxw.bean.init_bean;
 
 import org.junit.Test;
 import org.springframework.beans.BeansException;

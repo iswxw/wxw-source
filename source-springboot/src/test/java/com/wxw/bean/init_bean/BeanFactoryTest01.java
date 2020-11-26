@@ -1,4 +1,4 @@
-package com.wxw.bean;
+package com.wxw.bean.init_bean;
 
 import com.wxw.domain.DefaultListableBeanFactory;
 import org.junit.Test;

@@ -15,6 +15,7 @@ public class MainApp {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         HelloWorld obj = (HelloWorld) context.getBean("helloWorld");
         obj.getMessage();
+        // 将确保正常关闭，并且调用相关的 ​destroy​ 方法
         context.registerShutdownHook();
     }
 }
