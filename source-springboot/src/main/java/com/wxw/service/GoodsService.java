@@ -1,5 +1,6 @@
 package com.wxw.service;
 
+
 public class GoodsService {
     private UserService userService;
 

@@ -1,7 +1,11 @@
 package com.wxw;
 
+import com.wxw.common.config.AppConfig;
+import com.wxw.service.GoodsService;
+import com.wxw.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @ Author ：wxw.
@@ -13,6 +17,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootMain {
     public static void main(String[] args) {
         // spring应用启动
-        SpringApplication.run(SpringBootMain.class, args);
+         SpringApplication.run(SpringBootMain.class, args);
     }
 }
