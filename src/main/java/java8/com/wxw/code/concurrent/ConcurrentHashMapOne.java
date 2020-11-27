@@ -1,6 +1,7 @@
 package java8.com.wxw.code.concurrent;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
 
 /**
  * @Author: wxw
@@ -10,6 +11,7 @@ public class ConcurrentHashMapOne {
     public static void main(String[] args) {
         ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>();
         concurrentHashMap.put("1", "A");
+
 
     }
 }
