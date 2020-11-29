@@ -1,4 +1,4 @@
-package java8.com.wxw.code.concurrent;
+package java8.com.wxw.code.concurrent.lock.concurrenthashmap;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
