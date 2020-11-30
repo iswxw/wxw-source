@@ -577,6 +577,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
      */
     private static int RESIZE_STAMP_BITS = 16;
 
+    // 以下两个是用来控制扩容的时候 单线程进入的变量
     /**
      * The maximum number of threads that can help resize.
      * Must fit in 32 - RESIZE_STAMP_BITS bits.
@@ -591,8 +592,8 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /*
      * Encodings for Node hash fields. See above for explanation.
      */
-    static final int MOVED     = -1; // hash for forwarding nodes
-    static final int TREEBIN   = -2; // hash for roots of trees
+    static final int MOVED     = -1; // hash值是-1，表示这是一个forwardNode节点
+    static final int TREEBIN   = -2; // hash值是-2  表示这时一个TreeBin节点
     static final int RESERVED  = -3; // hash for transient reservations
     static final int HASH_BITS = 0x7fffffff; // usable bits of normal node hash
 
@@ -1011,6 +1012,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         if (key == null || value == null) throw new NullPointerException();
         int hash = spread(key.hashCode());
         int binCount = 0;
+        // 自旋插入节点
         for (Node<K,V>[] tab = table;;) {
             Node<K,V> f; int n, i, fh;
             if (tab == null || (n = tab.length) == 0)

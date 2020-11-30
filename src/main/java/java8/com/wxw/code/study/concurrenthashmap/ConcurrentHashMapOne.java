@@ -1,7 +1,6 @@
-package java8.com.wxw.code.concurrent.lock.concurrenthashmap;
+package java8.com.wxw.code.study.concurrenthashmap;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
 
 /**
  * @Author: wxw

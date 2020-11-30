@@ -9,7 +9,6 @@ package java8.com.wxw.code.concurrent.lock;
  */
 public class Synchronized01 {
     public static void main(String[] args) {
-
         // synchronized
 
     }
