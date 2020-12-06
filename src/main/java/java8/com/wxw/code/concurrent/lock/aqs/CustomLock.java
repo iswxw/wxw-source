@@ -26,6 +26,7 @@ public class CustomLock {
 
 
     static class Sync extends AbstractQueuedSynchronizer {
+
         void lock() {
             // 设置 非公平锁
             if (compareAndSetState(0, 1)) {
