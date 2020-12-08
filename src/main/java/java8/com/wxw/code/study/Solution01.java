@@ -12,5 +12,9 @@ public class Solution01 {
         // HashMap
         // HashSet
         // ConcurrentHashMap
+        int i = 0;
+        while (true){
+            System.out.println("死循环 = " + i++);
+        }
     }
 }
