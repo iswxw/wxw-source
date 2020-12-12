@@ -4,7 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 /**
- * @author ：wxw.
+ * @author ：com.wxw.
  * @date ： 11:59 2020/11/26
  * @description：初始化
  * @version: v_0.0.1

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @ Author ：wxw.
+ * @ Author ：com.wxw.
  * @ Date ： 16:16 2020/8/5
  * @ Description：测试的前端控制器
  * @ Version:   v_0.0.1

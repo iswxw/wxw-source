@@ -14,7 +14,7 @@ import org.springframework.core.ResolvableType;
 import java.util.Set;
 
 /**
- * @author: wxw
+ * @author: com.wxw
  * @date: 2020-10-05-17:13
  */
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory{

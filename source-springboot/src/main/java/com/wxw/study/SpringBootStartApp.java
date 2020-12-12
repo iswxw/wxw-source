@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * @author ：wxw.
+ * @author ：com.wxw.
  * @date ： 16:05 2020/11/27
  * @description：启动应用 https://mp.weixin.qq.com/s/q6zs7xRjpcB4YxLw6w477w
  * @version: v_0.0.1

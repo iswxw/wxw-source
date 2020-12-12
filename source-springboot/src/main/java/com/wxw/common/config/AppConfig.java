@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author ：wxw.
+ * @author ：com.wxw.
  * @date ： 16:04 2020/11/27
  * @description：配置类
  * @version: v_0.0.1

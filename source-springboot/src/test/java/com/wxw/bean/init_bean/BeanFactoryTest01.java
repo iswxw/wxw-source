@@ -10,7 +10,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 
 /**
  * 简化bean的创建过程
- * @Author: wxw
+ * @Author: com.wxw
  * @create: 2020-10-05-16:28
  */
 public class BeanFactoryTest01 {

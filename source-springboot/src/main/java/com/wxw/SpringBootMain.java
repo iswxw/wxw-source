@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @ Author ：wxw.
+ * @ Author ：com.wxw.
  * @ Date ： 8:39 2020/7/27
  * @ Description：SpringBoot 的启动类
  * @ Version:   v_0.0.1

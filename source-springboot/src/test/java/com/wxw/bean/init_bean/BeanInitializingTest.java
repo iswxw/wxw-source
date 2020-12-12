@@ -10,7 +10,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 /**
  * Bean初始化测试
  *
- * @author: wxw
+ * @author: com.wxw
  * @date: 2020-10-06-0:22
  */
 public class BeanInitializingTest {

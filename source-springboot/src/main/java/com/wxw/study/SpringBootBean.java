@@ -8,7 +8,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
 /**
- * @author ：wxw.
+ * @author ：com.wxw.
  * @date ： 16:14 2020/8/5
  * @description：SpringBoot bean加载流程源码分析 https://www.bilibili.com/video/BV1dy4y1C7MP
  * @version:   v_0.0.1

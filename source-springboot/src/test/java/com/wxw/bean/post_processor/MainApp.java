@@ -5,7 +5,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * @author ：wxw.
+ * @author ：com.wxw.
  * @date ： 12:15 2020/11/26
  * @description：后置处理器测试实现类  https://www.w3cschool.cn/wkspring/xs181ici.html
  * @version: v_0.0.1

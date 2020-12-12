@@ -9,7 +9,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
 /**
- * @author: wxw
+ * @author: com.wxw
  * @date: 2020-10-05-23:06
  */
 public class BeanLoadTest {
