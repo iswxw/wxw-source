@@ -1,4 +1,4 @@
-package jdk8.threadpool;
+package com.wxw.code.concurrent.threadpoll;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * https://mp.weixin.qq.com/s/D4dQKa4VUWdrzhg2RAkLAA
- * @author: com.wxw
+ * @author: com.wxw.wxw
  * @date: 2020-11-29-16:04
  */
 public class ThreadPoolDemo {

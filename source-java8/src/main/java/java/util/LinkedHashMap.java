@@ -293,7 +293,12 @@ public class LinkedHashMap<K,V>
         else
             a.before = b;
     }
-
+    /**
+     * 插入新节点才会触发该方法，因为只有插入新节点才需要内存
+     * 根据 HashMap 的 putVal 方法, evict 一直是 true
+     * removeEldestEntry 方法表示移除规则, 在 LinkedHashMap 里一直返回 false
+     * 所以在 LinkedHashMap 里这个方法相当于什么都不做
+     */
     void afterNodeInsertion(boolean evict) { // possibly remove eldest
         LinkedHashMap.Entry<K,V> first;
         if (evict && (first = head) != null && removeEldestEntry(first)) {
@@ -352,11 +357,12 @@ public class LinkedHashMap<K,V>
     /**
      * Constructs an empty insertion-ordered <tt>LinkedHashMap</tt> instance
      * with the specified initial capacity and a default load factor (0.75).
-     *
+     * 调用父类HashMap的构造方法。
      * @param  initialCapacity the initial capacity
      * @throws IllegalArgumentException if the initial capacity is negative
      */
     public LinkedHashMap(int initialCapacity) {
+        // 调用父类HashMap的构造方法
         super(initialCapacity);
         accessOrder = false;
     }
@@ -398,6 +404,8 @@ public class LinkedHashMap<K,V>
      * @throws IllegalArgumentException if the initial capacity is negative
      *         or the load factor is nonpositive
      */
+    // accessOrder 默认是为false，如果要按读取顺序排序需要将其设为 true
+    //  initialCapacity 代表 map 的 容量，loadFactor 代表加载因子 (默认即可)
     public LinkedHashMap(int initialCapacity,
                          float loadFactor,
                          boolean accessOrder) {
@@ -508,6 +516,9 @@ public class LinkedHashMap<K,V>
      * @return   <tt>true</tt> if the eldest entry should be removed
      *           from the map; <tt>false</tt> if it should be retained.
      */
+    // 移除最近最少被访问条件之一，通过覆盖此方法可实现不同策略的缓存
+    // LinkedHashMap是默认返回false的，我们可以继承LinkedHashMap然后复写该方法即可
+    // 例如 LeetCode 第 146 题就是采用该种方法，直接 return size() > capacity;
     protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
         return false;
     }
