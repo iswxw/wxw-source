@@ -200,6 +200,7 @@ public class LinkedHashMap<K,V>
 
     /**
      * The head (eldest) of the doubly linked list.
+     * 双向链表的头节点
      */
     transient LinkedHashMap.Entry<K,V> head;
 
@@ -209,9 +210,8 @@ public class LinkedHashMap<K,V>
     transient LinkedHashMap.Entry<K,V> tail;
 
     /**
-     * The iteration ordering method for this linked hash map: <tt>true</tt>
-     * for access-order, <tt>false</tt> for insertion-order.
-     *
+     * The iteration ordering method for this linked hash map:
+     * <tt>true</tt> for access-order,true表示按照访问顺序迭代
      * @serial
      */
     final boolean accessOrder;
@@ -366,7 +366,9 @@ public class LinkedHashMap<K,V>
      * with the default initial capacity (16) and load factor (0.75).
      */
     public LinkedHashMap() {
+        // 调用HashMap的构造方法，其实就是初始化Entry[] table
         super();
+        // 这里是指是否基于访问排序，默认为false(插入顺序)
         accessOrder = false;
     }
 
@@ -698,7 +700,6 @@ public class LinkedHashMap<K,V>
     }
 
     // Iterators
-
     abstract class LinkedHashIterator {
         LinkedHashMap.Entry<K,V> next;
         LinkedHashMap.Entry<K,V> current;
@@ -709,11 +710,11 @@ public class LinkedHashMap<K,V>
             expectedModCount = modCount;
             current = null;
         }
-
+        // 根据双向链表判断
         public final boolean hasNext() {
             return next != null;
         }
-
+        // 迭代输出双向链表各节点
         final LinkedHashMap.Entry<K,V> nextNode() {
             LinkedHashMap.Entry<K,V> e = next;
             if (modCount != expectedModCount)
@@ -737,17 +738,17 @@ public class LinkedHashMap<K,V>
             expectedModCount = modCount;
         }
     }
-
+    // Key 迭代器，KeySet
     final class LinkedKeyIterator extends LinkedHashIterator
         implements Iterator<K> {
         public final K next() { return nextNode().getKey(); }
     }
-
+    // Value 迭代器，Values(Collection)
     final class LinkedValueIterator extends LinkedHashIterator
         implements Iterator<V> {
         public final V next() { return nextNode().value; }
     }
-
+    // Entry 迭代器，EntrySet
     final class LinkedEntryIterator extends LinkedHashIterator
         implements Iterator<Map.Entry<K,V>> {
         public final Map.Entry<K,V> next() { return nextNode(); }

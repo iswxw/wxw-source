@@ -1,7 +1,7 @@
 package sun.awt;
 
 /**
- * @ Author ：com.wxw.
+ * @ Author ：com.wxw.wxw.
  * @ Date ： 10:39 2020/7/9
  * @ Description：
  * @ Version:   v_0.0.1
