@@ -16,7 +16,6 @@
      <modules>
          <module>source-java8</module>
          <module>source-springboot</module>
-         <module>source-rocketmq</module>
          <module>source-mybatis</module>
      </modules>
 

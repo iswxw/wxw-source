@@ -1,6 +1,7 @@
 package jdk8.threadpool;
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -17,10 +18,12 @@ public class ThreadPoolDemo {
         for (int i = 0; i < 20; i++) {
             MyTask myTask = new MyTask(i);
             executor.execute(myTask);
-            System.out.println("线程池中线程数量：" + executor.getPoolSize() + "、任务队列中等待执行的任务数量：" +
-                    executor.getQueue().size() + "、执行完成的任务数量：" + executor.getCompletedTaskCount());
+            System.out.println("线程池中线程数量：" + executor.getPoolSize() +
+                               "、任务队列中等待执行的任务数量：" + executor.getQueue().size() +
+                               "、执行完成的任务数量：" + executor.getCompletedTaskCount());
         }
         executor.shutdown();
     }
+
 
 }
