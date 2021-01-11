@@ -25,3 +25,4 @@ target/
 hs_err_pid*
 /src/main/java/java8/org/
 #/src/test/java/
+/source-rocketmq/
