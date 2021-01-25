@@ -1,4 +1,4 @@
-package jdk8.threadpool;
+package java8.threadpool;
 
 import java.util.concurrent.*;
 
