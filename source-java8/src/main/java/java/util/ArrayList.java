@@ -105,16 +105,18 @@ import sun.misc.SharedSecrets;
  */
 
 public class ArrayList<E> extends AbstractList<E>
-        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
-{
+        implements List<E>, RandomAccess, Cloneable, java.io.Serializable {
+
     private static final long serialVersionUID = 8683452581122892189L;
 
     /**
+     * 默认初始容量
      * Default initial capacity.
      */
     private static final int DEFAULT_CAPACITY = 10;
 
     /**
+     * 共享空实例数组
      * Shared empty array instance used for empty instances.
      */
     private static final Object[] EMPTY_ELEMENTDATA = {};
@@ -142,6 +144,7 @@ public class ArrayList<E> extends AbstractList<E>
     private int size;
 
     /**
+     * 带初始容量参数的构造函数。（用户自己指定容量）
      * Constructs an empty list with the specified initial capacity.
      *
      * @param  initialCapacity  the initial capacity of the list
@@ -150,8 +153,10 @@ public class ArrayList<E> extends AbstractList<E>
      */
     public ArrayList(int initialCapacity) {
         if (initialCapacity > 0) {
+            // 创建initialCapacity大小的数组
             this.elementData = new Object[initialCapacity];
         } else if (initialCapacity == 0) {
+            //初始容量等于0
             this.elementData = EMPTY_ELEMENTDATA;
         } else {
             throw new IllegalArgumentException("Illegal Capacity: "+
@@ -160,6 +165,7 @@ public class ArrayList<E> extends AbstractList<E>
     }
 
     /**
+     * 默认构造函数，使用初始容量10构造一个空列表(无参数构造)
      * Constructs an empty list with an initial capacity of ten.
      */
     public ArrayList() {
@@ -167,6 +173,8 @@ public class ArrayList<E> extends AbstractList<E>
     }
 
     /**
+     * 构造包含指定collection元素的列表，这些元素利用该集合的迭代器按顺序返回
+     * 如果指定的集合为null，throws NullPointerException。
      * Constructs a list containing the elements of the specified
      * collection, in the order they are returned by the collection's
      * iterator.
@@ -248,6 +256,7 @@ public class ArrayList<E> extends AbstractList<E>
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
     /**
+     * 扩容的核心方法
      * Increases the capacity to ensure that it can hold at least the
      * number of elements specified by the minimum capacity argument.
      *
@@ -256,6 +265,7 @@ public class ArrayList<E> extends AbstractList<E>
     private void grow(int minCapacity) {
         // overflow-conscious code
         int oldCapacity = elementData.length;
+        // 扩容为原来的 1.5 倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         if (newCapacity - minCapacity < 0)
             newCapacity = minCapacity;
