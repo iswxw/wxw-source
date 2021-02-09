@@ -1,4 +1,4 @@
-package java8.langs;
+package com.wxw.code.langs;
 
 /**
  * @author: wxw

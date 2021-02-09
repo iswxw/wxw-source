@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @ Description：Java8 测试
  * @ Version:   v_0.0.1
  */
-public class MainTestJava8{
+public class _DemoJava8 {
     public static void main(String[] args) {
 
         /**
@@ -18,6 +18,7 @@ public class MainTestJava8{
          * （1） HashMap
          *  (2) ConcurrentHashMap
          */
+
         Map<String, String> hashMap = new HashMap<String, String>();
         Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
 

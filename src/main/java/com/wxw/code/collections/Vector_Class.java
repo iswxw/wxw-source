@@ -1,4 +1,4 @@
-package com.wxw.code.concurrent.zip.list;
+package com.wxw.code.collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
