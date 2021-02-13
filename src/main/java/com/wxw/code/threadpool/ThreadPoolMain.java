@@ -10,6 +10,7 @@ import java.util.concurrent.*;
  */
 public class ThreadPoolMain {
 
+
     public static void main(String[] args) {
 
         ThreadPoolExecutor taskExecutor = new ThreadPoolExecutor(
@@ -26,5 +27,6 @@ public class ThreadPoolMain {
                 },
                 new ThreadPoolExecutor.CallerRunsPolicy());
         BlockingQueue<Runnable> blockingQueue = taskExecutor.getQueue();
+
     }
 }

@@ -1,4 +1,4 @@
-package com.wxw.code.study.concurrenthashmap;
+package com.wxw.code.collections.concurrenthashmap;
 
 import java.util.concurrent.ConcurrentHashMap;
 

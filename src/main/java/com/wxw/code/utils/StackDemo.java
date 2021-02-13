@@ -1,4 +1,4 @@
-package com.wxw.code.util;
+package com.wxw.code.utils;
 
 import java.util.Stack;
 

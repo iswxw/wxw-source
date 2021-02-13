@@ -12,7 +12,7 @@ import java.util.Vector;
  * @description：Vector类
  * @version: v_0.0.1
  */
-public class Vector_Class {
+public class DemoVector {
     public static void main(String[] args) {
         List<String> list = new ArrayList<String>();      // 没有同步处理
         List list2 =  Collections.synchronizedList(list); // 同步块

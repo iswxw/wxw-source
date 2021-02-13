@@ -389,8 +389,9 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
     private static final int TIDYING    =  2 << COUNT_BITS;
     private static final int TERMINATED =  3 << COUNT_BITS;
 
-    // Packing and unpacking ctl
+    // Packing and unpacking ctl 获取运行状态
     private static int runStateOf(int c)     { return c & ~CAPACITY; }
+    // 取出低29位的值，表示获得党庆活动的线程数
     private static int workerCountOf(int c)  { return c & CAPACITY; }
     private static int ctlOf(int rs, int wc) { return rs | wc; }
 
