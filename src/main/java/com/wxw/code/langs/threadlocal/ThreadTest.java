@@ -1,4 +1,4 @@
-package com.wxw.code.lang.threadlocal;
+package com.wxw.code.langs.threadlocal;
 
 /**
  * @author: com.wxw.wxw

@@ -768,13 +768,12 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     /* ---------------- Fields -------------- */
 
     /**
-     * The array of bins. Lazily initialized upon first insertion.
-     * Size is always a power of two. Accessed directly by iterators.
+     *  table：默认为 null，初始化发生在第一次插入操作，默认大小为16的数组，用来存储Node节点数据，扩容时大小总是2的幂次方。
      */
     transient volatile Node<K,V>[] table;
 
     /**
-     * The next table to use; non-null only while resizing.
+     * 扩容后的新Node数组，只有在扩容时才非空.
      */
     private transient volatile Node<K,V>[] nextTable;
 
@@ -786,12 +785,11 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     private transient volatile long baseCount;
 
     /**
-     * Table initialization and resizing control.  When negative, the
-     * table is being initialized or resized: -1 for initialization,
-     * else -(1 + the number of active resizing threads).  Otherwise,
-     * when table is null, holds the initial table size to use upon
-     * creation, or 0 for default. After initialization, holds the
-     * next element count value upon which to resize the table.
+     * 控制table 的初始化和扩容
+     * 0  : 初始默认值
+     * -1 ：有线程正在进行table的初始化
+     * >0 : table初始化时使用的容量，或初始化/扩容完成后的threshold
+     * -(1 + nThreads) : 记录正在执行扩容任务的线程数,有 N-1 个线程正在复制 table
      */
     private transient volatile int sizeCtl;
 
@@ -1016,14 +1014,19 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         for (Node<K,V>[] tab = table;;) {
             Node<K,V> f; int n, i, fh;
             if (tab == null || (n = tab.length) == 0)
-                tab = initTable();
+                tab = initTable(); // 【1】如果数组为空就初始化数组
+            // 【2】计算当前槽点有没有值，没有值的话，cas 创建，失败继续自旋（for 死循环），直到成功，槽点有值的话，走 3
             else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
                 if (casTabAt(tab, i, null,
                              new Node<K,V>(hash, key, value, null)))
                     break;                   // no lock when adding to empty bin
             }
+            // 【3】如果槽点是转移节点(正在扩容)，就会一直自旋等待扩容完成之后再新增，不是转移节点，走 4；
             else if ((fh = f.hash) == MOVED)
                 tab = helpTransfer(tab, f);
+                // 槽点有值的，先锁定当前槽点，保证其余线程不能操作，
+                // 如果是链表，新增值到链表的尾部，
+                // 如果是红黑树，使用红黑树新增的方法新增；
             else {
                 V oldVal = null;
                 synchronized (f) {
@@ -1069,6 +1072,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
                 }
             }
         }
+        // 【5】新增完成之后 check 需不需要扩容，需要的话去扩容。
         addCount(1L, binCount);
         return null;
     }
@@ -2221,6 +2225,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * Initializes table, using the size recorded in sizeCtl.
+     * 初始化 table 使用 sizeCtl 记录 数组大小容量
      */
     private final Node<K,V>[] initTable() {
         Node<K,V>[] tab; int sc;

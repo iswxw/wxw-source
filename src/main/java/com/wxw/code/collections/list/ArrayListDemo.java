@@ -1,4 +1,4 @@
-package java8.collections.list;
+package com.wxw.code.collections.list;
 
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package java8.collections.map.linkedhashmap;
+package com.wxw.code.collections.linkedhashmap;
 
 import java.util.LinkedHashMap;
 

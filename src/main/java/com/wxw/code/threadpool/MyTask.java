@@ -1,4 +1,4 @@
-package java8.threadpool;
+package com.wxw.code.threadpool;
 
 /**
  * @author: com.wxw
