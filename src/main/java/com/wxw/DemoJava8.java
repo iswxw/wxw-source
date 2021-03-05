@@ -1,16 +1,17 @@
 package com.wxw;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @ Author ：com.wxw.wxw.
+ * @Author ：com.wxw.wxw.
  * @ Date ： 19:35 2020/7/4
  * @ Description：Java8 测试
  * @ Version:   v_0.0.1
  */
-public class _DemoJava8 {
+public class DemoJava8 {
     public static void main(String[] args) {
 
         /**
@@ -21,8 +22,7 @@ public class _DemoJava8 {
 
         Map<String, String> hashMap = new HashMap<String, String>();
         Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
-
-
+        // Serializable
 
     }
 }
