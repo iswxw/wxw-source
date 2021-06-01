@@ -1,6 +1,5 @@
 package com.wxw;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,6 +22,5 @@ public class DemoJava8 {
         Map<String, String> hashMap = new HashMap<String, String>();
         Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
         // Serializable
-
     }
 }
