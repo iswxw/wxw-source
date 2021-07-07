@@ -683,10 +683,12 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
                     s = t;
         }
         if (s != null)
+            //  释放当前线程
             LockSupport.unpark(s.thread);
     }
 
     /**
+     * 共享模式 释放动作
      * Release action for shared mode -- signals successor and ensures
      * propagation. (Note: For exclusive mode, release just amounts
      * to calling unparkSuccessor of head if it needs signal.)
@@ -710,6 +712,7 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
                 if (ws == Node.SIGNAL) {
                     if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
                         continue;            // loop to recheck cases
+                    // 释放锁
                     unparkSuccessor(h);
                 }
                 else if (ws == 0 &&
@@ -1013,6 +1016,7 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
     }
 
     /**
+     * 在共享可中断模式中 设置节点为等待状态
      * Acquires in shared interruptible mode.
      * @param arg the acquire argument
      */
@@ -1337,8 +1341,10 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
      * you like.
      * @throws InterruptedException if the current thread is interrupted
      */
+
     public final void acquireSharedInterruptibly(int arg)
             throws InterruptedException {
+        // 如果当前线程可中断，则抛出中断异常
         if (Thread.interrupted())
             throw new InterruptedException();
         if (tryAcquireShared(arg) < 0)
@@ -1371,6 +1377,7 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
 
     /**
      * Releases in shared mode.  Implemented by unblocking one or more
+     * 释放共享模式 实现解锁一个或多个线程
      * threads if {@link #tryReleaseShared} returns true.
      *
      * @param arg the release argument.  This value is conveyed to
@@ -1379,7 +1386,9 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
      * @return the value returned from {@link #tryReleaseShared}
      */
     public final boolean releaseShared(int arg) {
+        // 判断 如果 线程 state 状态 减为0了，则进行释放锁
         if (tryReleaseShared(arg)) {
+            // 释放锁逻辑
             doReleaseShared();
             return true;
         }

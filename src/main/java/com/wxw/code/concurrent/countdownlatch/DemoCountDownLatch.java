@@ -1,4 +1,6 @@
-package com.wxw.code.concurrent;
+package com.wxw.code.concurrent.countdownlatch;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -7,9 +9,11 @@ import java.util.concurrent.Executors;
 /**
  * https://www.itzhai.com/the-introduction-and-use-of-a-countdownlatch.html
  * @author: com.wxw.wxw
+ * @document: 倒计数锁存器
  * @date: 2020-10-13-23:29
  */
-public class CountDownLatchDemo {
+@Slf4j
+public class DemoCountDownLatch {
     public static void main(String[] args) throws InterruptedException {
         final CountDownLatch downLatch = new CountDownLatch(1); // 计数器
         /**
@@ -52,6 +56,7 @@ public class CountDownLatchDemo {
                         Thread.sleep((long) (Math.random() * 10000));
                         System.out.println("No." + NO + " arrived");
                     } catch (InterruptedException e) {
+                        log.info(e.toString(),e);
                     } finally {
                         // 每个选手到达终点时，end就减一
                         end.countDown();

@@ -155,26 +155,45 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  */
 public class CountDownLatch {
     /**
-     * Synchronization control For CountDownLatch.
-     * Uses AQS state to represent count.
+     * Synchronization control For CountDownLatch. Uses AQS state to represent count.
+     * 基于AQS的状态state 来同步控制 CountDownLatch
      */
     private static final class Sync extends AbstractQueuedSynchronizer {
         private static final long serialVersionUID = 4982264981922014374L;
 
+        /**
+         * 通过构造函数 控制 更新计数
+         * @param count
+         */
         Sync(int count) {
             setState(count);
         }
 
+        /**
+         * 获取当前计数值
+         * @return
+         */
         int getCount() {
             return getState();
         }
 
+        /**
+         * 获取共享锁
+         * @param acquires
+         * @return
+         */
         protected int tryAcquireShared(int acquires) {
             return (getState() == 0) ? 1 : -1;
         }
 
+        /**
+         * 释放共享锁
+         * @param releases
+         * @return
+         */
         protected boolean tryReleaseShared(int releases) {
             // Decrement count; signal when transition to zero
+            // 计数自减，直到最后一个减为0时，返回 true 执行释放锁逻辑
             for (;;) {
                 int c = getState();
                 if (c == 0)
@@ -197,6 +216,7 @@ public class CountDownLatch {
      */
     public CountDownLatch(int count) {
         if (count < 0) throw new IllegalArgumentException("count < 0");
+        // 设置 count 初始值
         this.sync = new Sync(count);
     }
 
@@ -205,6 +225,7 @@ public class CountDownLatch {
      * zero, unless the thread is {@linkplain Thread#interrupt interrupted}.
      *
      * <p>If the current count is zero then this method returns immediately.
+     *     如果当前计数 为0，那么此方法立即返回
      *
      * <p>If the current count is greater than zero then the current
      * thread becomes disabled for thread scheduling purposes and lies
@@ -227,6 +248,7 @@ public class CountDownLatch {
      * @throws InterruptedException if the current thread is interrupted
      *         while waiting
      */
+    // 锁中断
     public void await() throws InterruptedException {
         sync.acquireSharedInterruptibly(1);
     }
