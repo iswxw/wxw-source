@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wxw</groupId>
-    <artifactId>com.wxw-source</artifactId>
+    <artifactId>wxw-source</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -15,8 +15,7 @@
     </properties>
      <modules>
          <module>source-java8</module>
-         <module>source-springboot</module>
-         <module>source-mybatis</module>
+         <module>source-spring</module>
      </modules>
 
     <!--maven jar包管理-->
